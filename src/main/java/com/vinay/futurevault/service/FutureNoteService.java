@@ -8,6 +8,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import com.vinay.futurevault.dto.DashboardResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -87,5 +88,21 @@ public class FutureNoteService {
         FutureNote existing = getNoteById(id);
 
         repository.delete(existing);
+    }
+    public DashboardResponse getDashboard() {
+
+        String email = getLoggedInUserEmail();
+
+        long totalNotes = repository.countByEmail(email);
+
+        long lockedNotes = repository.countByEmailAndUnlockedFalse(email);
+
+        long unlockedNotes = repository.countByEmailAndUnlockedTrue(email);
+
+        return new DashboardResponse(
+                totalNotes,
+                lockedNotes,
+                unlockedNotes
+        );
     }
 }

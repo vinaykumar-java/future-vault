@@ -4,7 +4,9 @@ import com.vinay.futurevault.dto.FutureNoteRequest;
 import com.vinay.futurevault.entity.FutureNote;
 import com.vinay.futurevault.service.FutureNoteService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.vinay.futurevault.dto.DashboardResponse;
 
 import java.util.List;
 
@@ -28,6 +30,10 @@ public class FutureNoteController {
     @GetMapping
     public List<FutureNote> getAllNotes() {
         return service.getAllNotes();
+    }
+    @GetMapping("/dashboard")
+    public ResponseEntity<DashboardResponse> getDashboard() {
+        return ResponseEntity.ok(service.getDashboard());
     }
 
     // GET BY ID

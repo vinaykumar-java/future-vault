@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface FutureNoteRepository extends JpaRepository<FutureNote, Long> {
 
-    // Scheduler
+    List<FutureNote> findByEmail(String email);
+
     List<FutureNote> findByUnlockDateAndUnlockedFalse(LocalDate unlockDate);
 
-    // Get all notes of logged-in user
-    List<FutureNote> findByEmail(String email);
+    long countByEmail(String email);
+
+    long countByEmailAndUnlockedFalse(String email);
+
+    long countByEmailAndUnlockedTrue(String email);
 }
