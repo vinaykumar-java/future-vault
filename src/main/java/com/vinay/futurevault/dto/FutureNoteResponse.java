@@ -6,14 +6,33 @@ import java.time.LocalDateTime;
 public class FutureNoteResponse {
 
     private Long id;
+
     private String title;
+
     private String message;
-    private String email;
+
     private LocalDate unlockDate;
+
     private LocalDateTime createdAt;
-    private boolean unlocked;
+
+    private String status;
 
     public FutureNoteResponse() {
+    }
+
+    public FutureNoteResponse(Long id,
+                              String title,
+                              String message,
+                              LocalDate unlockDate,
+                              LocalDateTime createdAt,
+                              String status) {
+
+        this.id = id;
+        this.title = title;
+        this.message = message;
+        this.unlockDate = unlockDate;
+        this.createdAt = createdAt;
+        this.status = status;
     }
 
     public Long getId() {
@@ -40,14 +59,6 @@ public class FutureNoteResponse {
         this.message = message;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public LocalDate getUnlockDate() {
         return unlockDate;
     }
@@ -64,12 +75,11 @@ public class FutureNoteResponse {
         this.createdAt = createdAt;
     }
 
-    public boolean isUnlocked() {
-        return unlocked;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUnlocked(boolean unlocked) {
-        this.unlocked = unlocked;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
 }
