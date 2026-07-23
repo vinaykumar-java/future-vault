@@ -35,7 +35,11 @@ public class FutureNoteController {
     public ResponseEntity<DashboardResponse> getDashboard() {
         return ResponseEntity.ok(service.getDashboard());
     }
+    @GetMapping("/search")
+    public List<FutureNote> searchNotes(@RequestParam String keyword) {
 
+        return service.searchNotes(keyword);
+    }
     // GET BY ID
     @GetMapping("/{id}")
     public FutureNote getNoteById(@PathVariable Long id) {

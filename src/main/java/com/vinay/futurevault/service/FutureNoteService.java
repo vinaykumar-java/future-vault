@@ -105,4 +105,15 @@ public class FutureNoteService {
                 unlockedNotes
         );
     }
+    public List<FutureNote> searchNotes(String keyword) {
+
+        String email = getLoggedInUserEmail();
+
+        return repository.findByEmailAndTitleContainingIgnoreCaseOrEmailAndMessageContainingIgnoreCase(
+                email,
+                keyword,
+                email,
+                keyword
+        );
+    }
 }
