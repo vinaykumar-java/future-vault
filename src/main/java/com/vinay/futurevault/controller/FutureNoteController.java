@@ -1,5 +1,5 @@
 package com.vinay.futurevault.controller;
-
+import org.springframework.data.domain.Page;
 import com.vinay.futurevault.dto.FutureNoteRequest;
 import com.vinay.futurevault.entity.FutureNote;
 import com.vinay.futurevault.service.FutureNoteService;
@@ -28,8 +28,11 @@ public class FutureNoteController {
 
     // GET ALL
     @GetMapping
-    public List<FutureNote> getAllNotes() {
-        return service.getAllNotes();
+    public Page<FutureNote> getAllNotes(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        return service.getNotes(page, size);
     }
     @GetMapping("/dashboard")
     public ResponseEntity<DashboardResponse> getDashboard() {

@@ -1,5 +1,7 @@
 package com.vinay.futurevault.service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import com.vinay.futurevault.dto.FutureNoteRequest;
 import com.vinay.futurevault.entity.FutureNote;
 import com.vinay.futurevault.exception.ResourceNotFoundException;
@@ -115,5 +117,13 @@ public class FutureNoteService {
                 email,
                 keyword
         );
+    }
+    public Page<FutureNote> getNotes(int page, int size) {
+
+        String email = getLoggedInUserEmail();
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return repository.findByEmail(email, pageable);
     }
 }
