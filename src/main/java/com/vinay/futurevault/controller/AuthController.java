@@ -1,13 +1,9 @@
 package com.vinay.futurevault.controller;
-import com.vinay.futurevault.dto.RefreshTokenRequest;
-import com.vinay.futurevault.dto.LoginRequest;
-import com.vinay.futurevault.dto.RegisterRequest;
+import com.vinay.futurevault.dto.*;
 import com.vinay.futurevault.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import com.vinay.futurevault.dto.AuthResponse;
-import com.vinay.futurevault.dto.ForgotPasswordRequest;
-import com.vinay.futurevault.dto.ResetPasswordRequest;
+
 @RestController
 
 @RequestMapping("/api/auth")
@@ -20,32 +16,54 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @RequestBody RegisterRequest request) {
-        return userService.register(request);
-    }
+    public ApiResponse<String> register(
+            @Valid @RequestBody RegisterRequest request) {
 
+        return new ApiResponse<>(
+                true,
+                "User registered successfully",
+                userService.register(request)
+        );
+    }
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
-        System.out.println("LOGIN API CALLED");
-        return userService.login(request);
+    public ApiResponse<AuthResponse> login(
+            @Valid @RequestBody LoginRequest request) {
+
+        return new ApiResponse<>(
+                true,
+                "Login successful",
+                userService.login(request)
+        );
     }
     @PostMapping("/refresh")
-    public AuthResponse refreshToken(
+    public ApiResponse<AuthResponse> refreshToken(
             @RequestBody RefreshTokenRequest request) {
 
-        return userService.refreshToken(request);
+        return new ApiResponse<>(
+                true,
+                "Token refreshed successfully",
+                userService.refreshToken(request)
+        );
     }
     @PostMapping("/forgot-password")
-    public String forgotPassword(
+    public ApiResponse<String> forgotPassword(
             @Valid @RequestBody ForgotPasswordRequest request) {
 
-        return userService.forgotPassword(request);
+        return new ApiResponse<>(
+                true,
+                "Password reset email sent",
+                userService.forgotPassword(request)
+        );
     }
 
     @PostMapping("/reset-password")
-    public String resetPassword(
+    public ApiResponse<String> resetPassword(
             @Valid @RequestBody ResetPasswordRequest request) {
 
-        return userService.resetPassword(request);
+        return new ApiResponse<>(
+                true,
+                "Password reset successful",
+                userService.resetPassword(request)
+        );
     }
 }

@@ -1,0 +1,5 @@
+target/*.original
+.idea
+.git
+.gitignore
+README.md

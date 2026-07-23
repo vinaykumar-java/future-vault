@@ -2,10 +2,13 @@ package com.vinay.futurevault.service;
 
 import com.vinay.futurevault.entity.User;
 import com.vinay.futurevault.repository.UserRepository;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -27,7 +30,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())
-                .authorities("USER")
+                .authorities(
+                        List.of(new SimpleGrantedAuthority(user.getRole().name()))
+                )
                 .build();
     }
 }
