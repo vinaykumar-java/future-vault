@@ -1,12 +1,13 @@
 package com.vinay.futurevault.controller;
-
+import com.vinay.futurevault.dto.RefreshTokenRequest;
 import com.vinay.futurevault.dto.LoginRequest;
 import com.vinay.futurevault.dto.RegisterRequest;
 import com.vinay.futurevault.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
+import com.vinay.futurevault.dto.AuthResponse;
 @RestController
+
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -22,8 +23,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @RequestBody LoginRequest request) {
+    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
         System.out.println("LOGIN API CALLED");
         return userService.login(request);
+    }
+    @PostMapping("/refresh")
+    public AuthResponse refreshToken(
+            @RequestBody RefreshTokenRequest request) {
+
+        return userService.refreshToken(request);
     }
 }
