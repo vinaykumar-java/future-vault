@@ -46,4 +46,27 @@ public class EmailService {
 
         sendEmail(to, subject, body);
     }
+    public void sendPasswordResetEmail(String to, String resetLink) {
+
+        String subject = "Future Vault - Password Reset";
+
+        String body = """
+            Hello,
+
+            We received a request to reset your password.
+
+            Click the link below to reset it:
+
+            %s
+
+            This link is valid for 15 minutes.
+
+            If you did not request a password reset, you can safely ignore this email.
+
+            Thank you,
+            Future Vault Team
+            """.formatted(resetLink);
+
+        sendEmail(to, subject, body);
+    }
 }

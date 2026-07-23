@@ -6,6 +6,8 @@ import com.vinay.futurevault.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.vinay.futurevault.dto.AuthResponse;
+import com.vinay.futurevault.dto.ForgotPasswordRequest;
+import com.vinay.futurevault.dto.ResetPasswordRequest;
 @RestController
 
 @RequestMapping("/api/auth")
@@ -32,5 +34,18 @@ public class AuthController {
             @RequestBody RefreshTokenRequest request) {
 
         return userService.refreshToken(request);
+    }
+    @PostMapping("/forgot-password")
+    public String forgotPassword(
+            @Valid @RequestBody ForgotPasswordRequest request) {
+
+        return userService.forgotPassword(request);
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(
+            @Valid @RequestBody ResetPasswordRequest request) {
+
+        return userService.resetPassword(request);
     }
 }
